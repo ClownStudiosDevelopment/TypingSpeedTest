@@ -1,7 +1,7 @@
-const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza'];
-const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays'];
-const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny'];
-const adverbs = ['quickly', 'slowly', 'happily', 'loudly', 'carefully', 'quietly', 'sadly', 'eagerly', 'angrily'];
+const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza', 'ghost', 'pumpkin', 'witch', 'bat', 'zombie', 'candy', 'spider', 'skeleton', 'vampire', 'mummy', 'haunted house'];
+const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays', 'haunts', 'scares', 'tricks', 'treats', 'bewitches', 'lurks'];
+const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny', 'spooky', 'creepy', 'eerie', 'chilling', 'frightening'];
+const adverbs = ['quickly', 'slowly', 'happily', 'loudly', 'carefully', 'quietly', 'sadly', 'eagerly', 'frighteningly', 'mysteriously'];
 const articles = ['the', 'a'];
 const prepositions = ['on', 'over', 'under', 'behind', 'beside', 'with', 'near'];
 
@@ -14,7 +14,6 @@ function generateSentence() {
     const preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
     const article2 = articles[Math.floor(Math.random() * articles.length)];
     const noun2 = nouns[Math.floor(Math.random() * nouns.length)];
-
     return `${article1.charAt(0).toUpperCase() + article1.slice(1)} ${adjective} ${noun1} ${verb} ${adverb} ${preposition} ${article2} ${noun2}.`;
 }
 
@@ -32,19 +31,15 @@ let pausedDuration = 0;
 
 function startTyping() {
     const textToType = textToTypeElement.textContent;
-
     if (!isTyping && typedText.value.length === 1) {
         startTime = new Date();
         isTyping = true;
     }
-
     if (typedText.value === textToType) {
         const endTime = new Date();
         const timeTaken = (endTime - startTime - pausedDuration) / 1000;
         const wordsPerMinute = (textToType.split(' ').length / timeTaken) * 60;
-
         resultElement.textContent = `You typed at ${Math.round(wordsPerMinute)} WPM!`;
-
         textToTypeElement.textContent = generateSentence();
         typedText.value = '';
         isTyping = false;
@@ -78,7 +73,6 @@ function restartGame() {
 }
 
 textToTypeElement.textContent = generateSentence();
-
 typedText.addEventListener('input', startTyping);
 restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePause);
