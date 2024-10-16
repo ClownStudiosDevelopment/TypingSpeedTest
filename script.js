@@ -87,14 +87,16 @@ function createShapes(count) {
     for (let i = 0; i < count; i++) {
         const shape = document.createElement('div');
         shape.classList.add('background-shape', `shape${(i % 3) + 1}`);
+        shape.setAttribute('draggable', true);
         document.body.appendChild(shape);
         moveShape(shape);
+        addDragEvents(shape);
     }
 }
 
 function moveShape(shape) {
-    let posX = Math.random() * window.innerWidth;
-    let posY = Math.random() * window.innerHeight;
+    let posX = Math.random() * (window.innerWidth - shape.offsetWidth);
+    let posY = Math.random() * (window.innerHeight - shape.offsetHeight);
     let speedX = (Math.random() - 0.5) * 2;
     let speedY = (Math.random() - 0.5) * 2;
 
@@ -115,6 +117,27 @@ function moveShape(shape) {
     }
 
     animate();
+}
+
+function addDragEvents(shape) {
+    let offsetX, offsetY;
+
+    shape.addEventListener('mousedown', (e) => {
+        offsetX = e.clientX - shape.getBoundingClientRect().left;
+        offsetY = e.clientY - shape.getBoundingClientRect().top;
+
+        function mouseMoveHandler(e) {
+            shape.style.transform = `translate(${e.clientX - offsetX}px, ${e.clientY - offsetY}px)`;
+        }
+
+        function mouseUpHandler() {
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('mouseup', mouseUpHandler);
+        }
+
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+    });
 }
 
 createShapes(10);
