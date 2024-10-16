@@ -120,23 +120,16 @@ function moveShape(shape) {
 }
 
 function addDragEvents(shape) {
-    let offsetX, offsetY;
+    shape.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', null);
+        shape.style.position = 'absolute';
+        shape.style.pointerEvents = 'none';
+    });
 
-    shape.addEventListener('mousedown', (e) => {
-        offsetX = e.clientX - shape.getBoundingClientRect().left;
-        offsetY = e.clientY - shape.getBoundingClientRect().top;
-
-        function mouseMoveHandler(e) {
-            shape.style.transform = `translate(${e.clientX - offsetX}px, ${e.clientY - offsetY}px)`;
-        }
-
-        function mouseUpHandler() {
-            document.removeEventListener('mousemove', mouseMoveHandler);
-            document.removeEventListener('mouseup', mouseUpHandler);
-        }
-
-        document.addEventListener('mousemove', mouseMoveHandler);
-        document.addEventListener('mouseup', mouseUpHandler);
+    shape.addEventListener('dragend', (e) => {
+        shape.style.pointerEvents = 'auto';
+        shape.style.left = `${e.pageX}px`;
+        shape.style.top = `${e.pageY}px`;
     });
 }
 
