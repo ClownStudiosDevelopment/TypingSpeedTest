@@ -73,12 +73,14 @@ button:hover {
 }
 
 footer {
-    background-color: #3b3b3b;
+    background-color: transparent; /* Remove background color */
     padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: white; /* Ensure text is still visible */
 }
+
 
 .background-shape {
     position: absolute;
