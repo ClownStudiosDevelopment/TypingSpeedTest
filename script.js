@@ -83,15 +83,22 @@ typedText.addEventListener('input', startTyping);
 restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePause);
 
-const shapesContainer = document.querySelectorAll('.background-shape');
+function createShapes(count) {
+    for (let i = 0; i < count; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('background-shape', `shape${(i % 3) + 1}`);
+        document.body.appendChild(shape);
+        moveShape(shape);
+    }
+}
 
-shapesContainer.forEach(shape => {
+function moveShape(shape) {
     let posX = Math.random() * window.innerWidth;
     let posY = Math.random() * window.innerHeight;
     let speedX = (Math.random() - 0.5) * 2;
     let speedY = (Math.random() - 0.5) * 2;
 
-    function moveShape() {
+    function animate() {
         posX += speedX;
         posY += speedY;
 
@@ -104,20 +111,10 @@ shapesContainer.forEach(shape => {
         }
 
         shape.style.transform = `translate(${posX}px, ${posY}px)`;
-        requestAnimationFrame(moveShape);
+        requestAnimationFrame(animate);
     }
 
-    moveShape();
-});
-
-// Create multiple shapes
-function createShapes(count) {
-    for (let i = 0; i < count; i++) {
-        const shape = document.createElement('div');
-        shape.classList.add('background-shape', `shape${i % 3 + 1}`); 
-        document.body.appendChild(shape);
-        moveShape(shape);
-    }
+    animate();
 }
 
 createShapes(10);
