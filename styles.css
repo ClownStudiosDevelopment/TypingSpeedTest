@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
+    min-height: 100vh;
 }
 
 .container {
@@ -15,8 +16,8 @@ body {
     background-color: rgba(30, 30, 30, 0.8);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    margin-top: 100px; /* Added margin to separate from top */
-    margin-bottom: 100px; /* Added margin to separate from bottom */
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -75,8 +76,10 @@ button:hover {
 }
 
 footer {
-    position: relative;
-    margin-top: 30px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 10px;
     background-color: #1e1e1e;
 }
