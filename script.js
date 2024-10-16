@@ -83,9 +83,9 @@ typedText.addEventListener('input', startTyping);
 restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePause);
 
-const shapes = document.querySelectorAll('.background-shape');
+const shapesContainer = document.querySelectorAll('.background-shape');
 
-shapes.forEach(shape => {
+shapesContainer.forEach(shape => {
     let posX = Math.random() * window.innerWidth;
     let posY = Math.random() * window.innerHeight;
     let speedX = (Math.random() - 0.5) * 2;
@@ -109,3 +109,15 @@ shapes.forEach(shape => {
 
     moveShape();
 });
+
+// Create multiple shapes
+function createShapes(count) {
+    for (let i = 0; i < count; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('background-shape', `shape${i % 3 + 1}`); 
+        document.body.appendChild(shape);
+        moveShape(shape);
+    }
+}
+
+createShapes(10);
