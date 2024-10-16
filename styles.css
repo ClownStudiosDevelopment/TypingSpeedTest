@@ -9,12 +9,14 @@ body {
 }
 
 .container {
-    padding: 40px 20px;
+    padding: 60px 20px;
     max-width: 800px;
     margin: auto;
     background-color: rgba(30, 30, 30, 0.8);
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-top: 100px; /* Added margin to separate from top */
+    margin-bottom: 100px; /* Added margin to separate from bottom */
 }
 
 h1 {
