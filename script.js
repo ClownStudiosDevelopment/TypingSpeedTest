@@ -87,10 +87,8 @@ function createShapes(count) {
     for (let i = 0; i < count; i++) {
         const shape = document.createElement('div');
         shape.classList.add('background-shape', `shape${(i % 3) + 1}`);
-        shape.setAttribute('draggable', true);
         document.body.appendChild(shape);
         moveShape(shape);
-        addDragEvents(shape);
     }
 }
 
@@ -117,20 +115,6 @@ function moveShape(shape) {
     }
 
     animate();
-}
-
-function addDragEvents(shape) {
-    shape.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', null);
-        shape.style.position = 'absolute';
-        shape.style.pointerEvents = 'none';
-    });
-
-    shape.addEventListener('dragend', (e) => {
-        shape.style.pointerEvents = 'auto';
-        shape.style.left = `${e.pageX}px`;
-        shape.style.top = `${e.pageY}px`;
-    });
 }
 
 createShapes(10);
