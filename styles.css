@@ -32,14 +32,16 @@ h1 {
 
 #typedText {
     width: 100%;
-    max-width: 600px;
-    height: 150px;
+    max-width: 600px; /* Limit the maximum width */
+    max-height: 200px; /* Limit the maximum height */
+    height: auto; /* Allow the height to adjust */
     font-size: 1.5em;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #1e1e1e;
     color: #f1f1f1;
+    resize: none; /* Disable manual resizing */
 }
 
 #result {
@@ -122,7 +124,7 @@ footer {
 
     #typedText {
         font-size: 1em;
-        height: 120px; /* Reduce height for mobile */
+        height: 120px;
     }
 
     #result {
@@ -131,7 +133,7 @@ footer {
 
     button {
         font-size: 1em;
-        width: 100%; /* Full width on mobile */
+        width: 100%;
     }
 }
 
@@ -146,7 +148,7 @@ footer {
 
     #typedText {
         font-size: 0.9em;
-        height: 100px; /* Further reduce height for smaller screens */
+        height: 100px;
     }
 
     #result {
