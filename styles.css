@@ -1,4 +1,4 @@
-body {
+body { 
     background-color: #141414;
     color: white;
     font-family: Arial, sans-serif;
@@ -32,16 +32,16 @@ h1 {
 
 #typedText {
     width: 100%;
-    max-width: 600px; /* Limit the maximum width */
-    max-height: 200px; /* Limit the maximum height */
-    height: auto; /* Allow the height to adjust */
+    max-width: 600px;
+    max-height: 200px;
+    height: auto;
     font-size: 1.5em;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: #1e1e1e;
     color: #f1f1f1;
-    resize: both; /* Allow users to resize both width and height */
+    resize: both;
 }
 
 #result {
@@ -73,25 +73,24 @@ button:hover {
 }
 
 footer {
-    background-color: transparent; /* Remove background color */
+    background-color: transparent;
     padding: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
-    color: white; /* Ensure text is still visible */
+    color: white;
 }
-
 
 .background-shape {
     position: absolute;
     opacity: 0.1;
+    border-radius: 50%;
 }
 
 .shape1 {
     width: 100px;
     height: 100px;
     background-color: #ff4500;
-    border-radius: 50%;
     top: 50px;
     left: 20px;
 }
@@ -100,7 +99,6 @@ footer {
     width: 150px;
     height: 150px;
     background-color: #00ff00;
-    border-radius: 50%;
     top: 150px;
     right: 20px;
 }
@@ -109,7 +107,6 @@ footer {
     width: 120px;
     height: 120px;
     background-color: #ffd700;
-    border-radius: 50%;
     bottom: 200px;
     left: 50%;
     transform: translateX(-50%);
@@ -161,3 +158,4 @@ footer {
         font-size: 0.9em;
     }
 }
+
