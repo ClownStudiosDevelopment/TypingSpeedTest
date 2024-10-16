@@ -1,6 +1,6 @@
-const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza', 'ghost', 'witch', 'pumpkin', 'zombie', 'vampire', 'candy'];
-const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays', 'haunts'];
-const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny', 'spooky', 'creepy', 'dark'];
+const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza', 'ghost', 'witch', 'pumpkin', 'vampire'];
+const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays'];
+const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny', 'spooky', 'creepy', 'haunted'];
 const adverbs = ['quickly', 'slowly', 'happily', 'loudly', 'carefully', 'quietly', 'sadly', 'eagerly', 'angrily'];
 const articles = ['the', 'a'];
 const prepositions = ['on', 'over', 'under', 'behind', 'beside', 'with', 'near'];
@@ -14,6 +14,7 @@ function generateSentence() {
     const preposition = prepositions[Math.floor(Math.random() * prepositions.length)];
     const article2 = articles[Math.floor(Math.random() * articles.length)];
     const noun2 = nouns[Math.floor(Math.random() * nouns.length)];
+
     return `${article1.charAt(0).toUpperCase() + article1.slice(1)} ${adjective} ${noun1} ${verb} ${adverb} ${preposition} ${article2} ${noun2}.`;
 }
 
@@ -31,14 +32,17 @@ let pausedDuration = 0;
 
 function startTyping() {
     const textToType = textToTypeElement.textContent;
+
     if (!isTyping && typedText.value.length === 1) {
         startTime = new Date();
         isTyping = true;
     }
+
     if (typedText.value === textToType) {
         const endTime = new Date();
         const timeTaken = (endTime - startTime - pausedDuration) / 1000;
         const wordsPerMinute = (textToType.split(' ').length / timeTaken) * 60;
+
         resultElement.textContent = `You typed at ${Math.round(wordsPerMinute)} WPM!`;
         textToTypeElement.textContent = generateSentence();
         typedText.value = '';
@@ -78,37 +82,44 @@ restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePause);
 
 const shapes = [];
-const shapeCount = 10;
+const shapeCount = 5;
 
 for (let i = 0; i < shapeCount; i++) {
     const shape = document.createElement('div');
-    shape.className = 'background-shape';
-    const size = Math.random() * 50 + 50; // Size between 50px and 100px
-    shape.style.width = `${size}px`;
-    shape.style.height = `${size}px`;
-    shape.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`;
-    shape.style.position = 'absolute';
-    shape.style.top = `${Math.random() * (window.innerHeight - size)}px`;
-    shape.style.left = `${Math.random() * (window.innerWidth - size)}px`;
-    shape.dx = Math.random() < 0.5 ? 1 : -1; // Direction on x-axis
-    shape.dy = Math.random() < 0.5 ? 1 : -1; // Direction on y-axis
-    shapes.push(shape);
+    shape.classList.add('background-shape');
+    shape.style.width = `${Math.random() * 100 + 50}px`;
+    shape.style.height = shape.style.width;
+    shape.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    shape.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+    shape.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
     document.body.appendChild(shape);
+    shapes.push(shape);
 }
 
-function moveShapes() {
-    shapes.forEach(shape => {
-        const rect = shape.getBoundingClientRect();
-        if (rect.right >= window.innerWidth || rect.left <= 0) {
-            shape.dx *= -1;
-        }
-        if (rect.bottom >= window.innerHeight || rect.top <= 0) {
-            shape.dy *= -1;
-        }
-        shape.style.left = `${rect.left + shape.dx}px`;
-        shape.style.top = `${rect.top + shape.dy}px`;
-    });
-    requestAnimationFrame(moveShapes);
-}
+shapes.forEach(shape => {
+    const speedX = (Math.random() - 0.5) * 2;
+    const speedY = (Math.random() - 0.5) * 2;
 
-moveShapes();
+    function animate() {
+        let top = parseFloat(shape.style.top);
+        let left = parseFloat(shape.style.left);
+
+        if (top + parseFloat(shape.style.height) >= window.innerHeight || top <= 0) {
+            speedY *= -1;
+        }
+
+        if (left + parseFloat(shape.style.width) >= window.innerWidth || left <= 0) {
+            speedX *= -1;
+        }
+
+        top += speedY;
+        left += speedX;
+
+        shape.style.top = `${top}px`;
+        shape.style.left = `${left}px`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+});
