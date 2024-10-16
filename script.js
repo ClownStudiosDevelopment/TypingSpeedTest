@@ -1,7 +1,7 @@
-const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza', 'ghost', 'pumpkin', 'bat', 'witch', 'candy', 'zombie'];
-const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays', 'haunts'];
-const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny', 'spooky', 'creepy', 'dark'];
-const adverbs = ['quickly', 'slowly', 'happily', 'loudly', 'carefully', 'quietly', 'sadly', 'eagerly', 'angrily'];
+const nouns = ['dog', 'cat', 'apple', 'car', 'teacher', 'book', 'planet', 'house', 'computer', 'pizza', 'ghost', 'pumpkin', 'witch', 'skeleton', 'candy', 'zombie'];
+const verbs = ['eats', 'drives', 'writes', 'jumps', 'flies', 'types', 'runs', 'reads', 'sings', 'plays', 'haunts', 'scares'];
+const adjectives = ['quick', 'lazy', 'red', 'delicious', 'happy', 'smart', 'bright', 'loud', 'green', 'funny', 'spooky', 'creepy', 'eerie'];
+const adverbs = ['quickly', 'slowly', 'happily', 'loudly', 'carefully', 'quietly', 'sadly', 'eagerly', 'frightfully'];
 const articles = ['the', 'a'];
 const prepositions = ['on', 'over', 'under', 'behind', 'beside', 'with', 'near'];
 
@@ -82,3 +82,30 @@ textToTypeElement.textContent = generateSentence();
 typedText.addEventListener('input', startTyping);
 restartButton.addEventListener('click', restartGame);
 pauseButton.addEventListener('click', togglePause);
+
+const shapes = document.querySelectorAll('.background-shape');
+
+shapes.forEach(shape => {
+    let posX = Math.random() * window.innerWidth;
+    let posY = Math.random() * window.innerHeight;
+    let speedX = (Math.random() - 0.5) * 2;
+    let speedY = (Math.random() - 0.5) * 2;
+
+    function moveShape() {
+        posX += speedX;
+        posY += speedY;
+
+        if (posX <= 0 || posX + shape.offsetWidth >= window.innerWidth) {
+            speedX = -speedX;
+        }
+
+        if (posY <= 0 || posY + shape.offsetHeight >= window.innerHeight) {
+            speedY = -speedY;
+        }
+
+        shape.style.transform = `translate(${posX}px, ${posY}px)`;
+        requestAnimationFrame(moveShape);
+    }
+
+    moveShape();
+});
